@@ -7,15 +7,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use \App\Models\Rawpus\Pasien;
-
+use DB;
 class PasienController extends Controller
 {
     public function index(){
         \DB::statement(\DB::raw('set @rownum=0'));
 
-        $status=Pasien::select('id','no_kartu','nama_peserta',
-            'sex','tgl_lahir','pekerjaan','alamat',
-            \DB::raw('@rownum := @rownum + 1 AS no'));
+        $status=Pasien::select('id','nik','no_kartu','nama_peserta',
+            'sex','tgl_lahir','pekerjaan','alamat','golongan_darah','desa_id',
+            \DB::raw('@rownum := @rownum + 1 AS no'))
+            ->with('desa');
 
         return \DataTables::of($status)
             ->addColumn('action',function($query){
@@ -31,12 +32,15 @@ class PasienController extends Controller
 
     public function store(Request $request){
         $rules=[
+            'nik'=>'required',
             'nama'=>'required',
             'no_kartu'=>'required',
             'sex'=>'required',
             'tgl_lahir'=>'required',
             'pekerjaan'=>'required',
-            'alamat'=>'required'
+            'alamat'=>'required',
+            'goldar'=>'required',
+            'desa'=>'required'
         ];
 
         $validasi=\Validator::make($request->all(),$rules);
@@ -49,12 +53,15 @@ class PasienController extends Controller
             );
         }else{
             $status=new Pasien;
+            $status->nik=$request->input('nik');
             $status->no_kartu=$request->input('no_kartu');
             $status->nama_peserta=$request->input('nama');
             $status->sex=$request->input('sex');
             $status->tgl_lahir=date('Y-m-d',strtotime($request->input('tgl_lahir')));
+            $status->golongan_darah=$request->input('goldar');
             $status->pekerjaan=$request->input('pekerjaan');
             $status->alamat=$request->input('alamat');
+            $status->desa_id=$request->input('desa');
             $status->save();
 
             $data=array(
@@ -75,12 +82,15 @@ class PasienController extends Controller
 
     public function update(Request $request,$id){
         $rules=[
+            'nik'=>'required',
             'nama'=>'required',
             'no_kartu'=>'required',
             'sex'=>'required',
             'tgl_lahir'=>'required',
             'pekerjaan'=>'required',
-            'alamat'=>'required'
+            'alamat'=>'required',
+            'goldar'=>'required',
+            'desa'=>'required'
         ];
 
         $validasi=\Validator::make($request->all(),$rules);
@@ -93,12 +103,15 @@ class PasienController extends Controller
             );
         }else{
             $status=Pasien::find($id);
+            $status->nik=$request->input('nik');
             $status->no_kartu=$request->input('no_kartu');
             $status->nama_peserta=$request->input('nama');
             $status->sex=$request->input('sex');
             $status->tgl_lahir=date('Y-m-d',strtotime($request->input('tgl_lahir')));
+            $status->golongan_darah=$request->input('goldar');
             $status->pekerjaan=$request->input('pekerjaan');
             $status->alamat=$request->input('alamat');
+            $status->desa_id=$request->input('desa');
             $status->save();
 
             $data=array(
@@ -137,5 +150,50 @@ class PasienController extends Controller
         $status=\App\Models\Rawpus\Jabatan::select('id','name')->get();
 
         return $status;
+    }
+
+    public function list_wilayah(Request $request){
+        $wilayah=\App\Models\Rawpus\Desa::where('wilayah_id',3328060)->get();
+
+        return $wilayah;
+    }
+
+    public function list_pencarian(Request $request){
+        $rules=[
+            'q'=>'required'
+        ];
+
+        $validasi=\Validator::make($request->all(),$rules);
+
+        if($validasi->fails()){
+            $data=array(
+                'success'=>false,
+                'pesan'=>"Validasi Gagal",
+                'error'=>''
+            );
+        }else{
+            $q=$request->input('q');
+
+            $pasien=Pasien::where('nik',$q)
+                ->orWhere('no_kartu',$q)
+                ->with('desa')
+                ->get();
+
+            if(count($pasien)>0){
+                $data=array(
+                    'success'=>true,
+                    'pesan'=>'Data berhasil ditemukan',
+                    'pasien'=>$pasien
+                );
+            }else{
+                $data=array(
+                    'success'=>false,
+                    'pesan'=>'Data tidak ditemukan',
+                    'error'=>''
+                );
+            }
+        }
+
+        return $data;
     }
 }

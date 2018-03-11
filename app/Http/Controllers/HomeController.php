@@ -64,6 +64,40 @@ class HomeController extends Controller
     }
 
     public function rawpus_pasien(){
-        return view('rawpus.pasien');
+        $wilayah=\App\Models\Rawpus\Wilayah::with('desa')->find(3328060);
+
+        return view('rawpus.pasien')
+            ->with('wilayah',$wilayah);
+    }
+
+    public function rawpus_wilayah(){
+        $wilayah=\App\Models\Rawpus\Wilayah::with('desa')->find(3328060);
+        
+        return view('rawpus.wilayah')
+            ->with('wilayah',$wilayah);
+    }
+
+    public function rawpus_pendaftaran_pasien(){
+        return view('rawpus.pendaftaran_pasien');
+    }
+
+    public function rawpus_pelayanan_pasien(){
+        return view('rawpus.pelayanan_pasien');
+    }
+
+    public function rawpus_jumlah_peserta_terdaftar(){
+        return view('rawpus.jumlah_peserta_terdaftar');
+    }
+    
+    public function rawpus_daftar_kunjungan_peserta_sakit(){
+        return view('rawpus.daftar_kunjungan_peserta_sakit');
+    }
+
+    public function rawpus_daftar_kunjungan_peserta_sehat(){
+        return view('rawpus.daftar_kunjungan_peserta_sehat');
+    }
+
+    public function rawpus_daftar_10_diagnosa_terbanyak(){
+        return view('rawpus.daftar_10_diagnosa_terbanyak');
     }
 }

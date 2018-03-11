@@ -38,6 +38,7 @@
     <script>
         $(function(){
             var kode="";
+            var wilayah=@json($wilayah);
 
             $('.daterange-single').daterangepicker({ 
                     singleDatePicker: true,
@@ -77,12 +78,14 @@
                     ajax: "{{URL::to('home/data/pasien')}}",
                     columns: [
                         {data: 'no', name: 'no',title:'No.',searchable:false,width:'5%'},
+                        {data: 'nik', name: 'nik',title:'NIK'},
                         {data: 'no_kartu', name: 'no_kartu',title:'No. Kartu'},
                         {data: 'nama_peserta', name: 'nama_peserta',title:'Nama Peserta'},
                         {data: 'sex', name: 'sex',title:'Sex'},
-                        {data: 'tgl_lahir', name: 'tgl_lahir',title:'Tgl. Lahir'},
-                        {data: 'pekerjaan', name: 'pekerjaan',title:'Pekerjaan'},
-                        {data: 'alamat', name: 'alamat',title:'Alamat'},
+                        {data: 'tgl_lahir', name: 'tgl_lahir',title:'Tgl. Lahir',visibled:true},
+                        {data: 'pekerjaan', name: 'pekerjaan',title:'Pekerjaan',visibled:true},
+                        {data: 'alamat', name: 'alamat',title:'Alamat',visibled:true},
+                        {data: 'desa.name', name: 'desa.name',title:'Desa'},
                         {data: 'action', name: 'action',title:'Action',searchable:false,width:'22%'}
                     ],
                     buttons: [
@@ -128,6 +131,10 @@
                                 '<div class="modal-body">'+
                                     '<div id="pesan"></div>'+
                                     '<div class="form-group">'+
+                                        '<label class="control-label text-semibold">NIK</label>'+
+                                        '<input class="form-control" name="nik" id="nik" placeholder="NIK" required>'+
+                                    '</div>'+
+                                    '<div class="form-group">'+
                                         '<label class="control-label text-semibold">No. Kartu</label>'+
                                         '<input class="form-control" name="no_kartu" id="no_kartu" placeholder="Name" required>'+
                                     '</div>'+
@@ -151,12 +158,25 @@
                                         '</select>'+
                                     '</div>'+
                                     '<div class="form-group">'+
+                                        '<label class="control-label text-semibold">Golongan Darah</label>'+
+                                        '<input class="form-control" name="goldar" id="goldar" placeholder="Golongan Darah" required>'+
+                                    '</div>'+
+                                    '<div class="form-group">'+
                                         '<label class="control-label text-semibold">Pekerjaan</label>'+
                                         '<input class="form-control" name="pekerjaan" id="pekerjaan" placeholder="Name" required>'+
                                     '</div>'+
                                     '<div class="form-group">'+
                                         '<label class="control-label text-semibold">Alamat</label>'+
                                         '<input class="form-control" name="alamat" id="alamat" placeholder="Name" required>'+
+                                    '</div>'+
+                                    '<div class="form-group">'+
+                                        '<label class="control-label text-semibold">Desa</label>'+
+                                        '<select name="desa" id="desa" class="form-control" required>'+
+                                            "<option value='' disabled selected>--Pilih Desa--</option>";
+                                            $.each(wilayah.desa,function(a,b){
+                                                el+="<option value='"+b.id+"'>"+b.name+"</option>";
+                                            })
+                                        el+="</select>"+
                                     '</div>'+
                                 '</div>'+
 
@@ -260,6 +280,10 @@
                     success:function(result){
                         el+='<div id="pesan"></div>'+
                         '<div class="form-group">'+
+                            '<label class="control-label text-semibold">NIK</label>'+
+                            '<input class="form-control" name="nik" value="'+result.nik+'" id="nik" placeholder="NIK" required>'+
+                        '</div>'+
+                        '<div class="form-group">'+
                             '<label class="control-label text-semibold">No. Kartu</label>'+
                             '<input class="form-control" value="'+result.no_kartu+'" name="no_kartu" id="no_kartu" placeholder="Name" required>'+
                         '</div>'+
@@ -283,16 +307,30 @@
                             '</select>'+
                         '</div>'+
                         '<div class="form-group">'+
+                            '<label class="control-label text-semibold">Golongan Darah</label>'+
+                            '<input class="form-control" value="'+result.golongan_darah+'" name="goldar" id="goldar" placeholder="Golongan Darah" required>'+
+                        '</div>'+
+                        '<div class="form-group">'+
                             '<label class="control-label text-semibold">Pekerjaan</label>'+
                             '<input class="form-control" value="'+result.pekerjaan+'" name="pekerjaan" id="pekerjaan" placeholder="Name" required>'+
                         '</div>'+
                         '<div class="form-group">'+
                             '<label class="control-label text-semibold">Alamat</label>'+
                             '<input class="form-control" name="alamat" value="'+result.alamat+'" id="alamat" placeholder="Name" required>'+
+                        '</div>'+
+                        '<div class="form-group">'+
+                            '<label class="control-label text-semibold">Desa</label>'+
+                            '<select name="desa" id="desa" class="form-control" required>'+
+                                "<option value='' disabled selected>--Pilih Desa--</option>";
+                                $.each(wilayah.desa,function(a,b){
+                                    el+="<option value='"+b.id+"'>"+b.name+"</option>";
+                                })
+                            el+="</select>"+
                         '</div>';
 
                         $("#showForm").empty().html(el);
                         $("#sex").val(result.sex);
+                        $("#desa").val(result.desa_id);
                     },
                     error:function(){
                         $("#showForm").empty().html("<div class='alert alert-danger'>Data Failed to load</div>");

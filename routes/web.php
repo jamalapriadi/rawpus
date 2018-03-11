@@ -30,6 +30,16 @@ Route::group(['prefix'=>'home'],function(){
     Route::get('tenaga-medis','HomeController@rawpus_tenaga_medis');
     Route::get('pasien','HomeController@rawpus_pasien');
 
+    Route::get('wilayah','HomeController@rawpus_wilayah');
+
+    Route::get('pendaftaran-pasien','HomeController@rawpus_pendaftaran_pasien');
+    Route::get('pelayanan-pasien','HomeController@rawpus_pelayanan_pasien');
+
+    Route::get('jumlah-peserta-terdaftar','HomeController@rawpus_jumlah_peserta_terdaftar');
+    Route::get('daftar-kunjungan-peserta-sakit','HomeController@rawpus_daftar_kunjungan_peserta_sakit');
+    Route::get('daftar-kunjungan-peserta-sehat','HomeController@rawpus_daftar_kunjungan_peserta_sehat');
+    Route::get('daftar-10-diagnosa-terbanyak','HomeController@rawpus_daftar_10_diagnosa_terbanyak');
+
     Route::group(['prefix'=>'data'],function(){
         Route::resource('users','User\UserController');
         Route::resource('roles','User\RoleController');
@@ -47,5 +57,9 @@ Route::group(['prefix'=>'home'],function(){
         Route::resource('tenaga-medis','Rawpus\TenagamedisController');
         Route::get('list-jabatan','Rawpus\TenagamedisController@list_jabatan');
         Route::resource('pasien','Rawpus\PasienController');
+        Route::get('list-wilayah','Rawpus\PasienController@list_wilayah');
+
+        Route::get('pencarian','Rawpus\PasienController@list_pencarian');
+        Route::resource('pendaftaran','Rawpus\PendaftaranController');
     });
 });
