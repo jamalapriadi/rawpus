@@ -82,7 +82,12 @@ class HomeController extends Controller
     }
 
     public function rawpus_pelayanan_pasien(){
-        return view('rawpus.pelayanan_pasien');
+        $tenaga=\App\Models\Rawpus\Tenagamedis::all();
+        $diagnosa=\App\Models\Rawpus\Diagnosa::all();
+
+        return view('rawpus.pelayanan_pasien')
+            ->with('tenaga',$tenaga)
+            ->with('diagnosa',$diagnosa);
     }
 
     public function rawpus_jumlah_peserta_terdaftar(){

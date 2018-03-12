@@ -12,7 +12,7 @@
     @section('css')
         <!-- CSS -->
         {{Html::style('css/icons/icomoon/styles.css')}}
-        {{ Html::style('klorofil/css/bootstrap.min.css')}}
+        {{ Html::style('klorofil/css/cosmo.min.css')}}
         {{ Html::style('klorofil/css/vendor/icon-sets.css')}}
         {{ Html::style('klorofil/css/main.min.css')}}
         {{ Html::style('klorofil/css/demo.css')}}

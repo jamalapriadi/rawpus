@@ -22,7 +22,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="#subEntridata" data-toggle="collapse" class="collapsed"><i class="icon-book3"></i> <span>Entri Data</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                    <a href="#subEntridata" data-toggle="collapse" class="collapsed"><i class="icon-profile"></i> <span>Entri Data</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                     <div id="subEntridata" class="collapse ">
                         <ul class="nav">
                             <li><a href="{{URL::to('home/pendaftaran-pasien')}}" class="{{ Request::path() == 'home/pendaftaran-pasien' ? 'active' : '' }}">Pendaftaran Pasien</a></li>
@@ -32,7 +32,7 @@
                 </li>
                 
                 <li>
-                    <a href="#subLihatdata" data-toggle="collapse" class="collapsed"><i class="icon-book3"></i> <span>Lihat Data</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                    <a href="#subLihatdata" data-toggle="collapse" class="collapsed"><i class="icon-folder-search"></i> <span>Lihat Data</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                     <div id="subLihatdata" class="collapse ">
                         <ul class="nav">
                             <li><a href="{{URL::to('home/jumlah-peserta-terdaftar')}}" class="{{ Request::path() == 'home/jumlah-peserta-terdaftar' ? 'active' : '' }}">Jumlah Peserta Terdaftar</a></li>

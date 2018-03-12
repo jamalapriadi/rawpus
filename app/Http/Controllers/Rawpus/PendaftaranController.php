@@ -11,7 +11,44 @@ use DB;
 class PendaftaranController extends Controller
 {
     public function index(Request $request){
-        
+        $pendaftaran=\App\Models\Rawpus\Pendaftaran::with('pasien','pelayanan');
+
+        return \DataTables::of($pendaftaran)
+            ->addColumn('usia',function($query){
+                return $this->hitung_umur($query->pasien->tgl_lahir);
+            })
+            ->addColumn('status',function($query){
+                if($query->pelayanan!=null){
+                    $html="Sudah Dilayani";
+                }else{
+                    $html="Baru";
+                }
+
+                return $html;
+            })
+            ->addColumn('action',function($query){
+                $html="<div class='btn-group' data-toggle='buttons'>";
+                if($query->pelayanan!=null){
+                    
+                }else{
+                    $html.="<a href='#' class='btn btn-sm btn-danger hapus' kode='".$query->no_pendaftaran."' title='Hapus'><i class='fa fa-trash'></i></a>";
+                }
+                
+                $html.="</div>";
+
+                return $html;
+            })
+            ->make(true);
+    }
+
+    function hitung_umur($tanggal_lahir) {
+        list($year,$month,$day) = explode("-",$tanggal_lahir);
+        $year_diff  = date("Y") - $year;
+        $month_diff = date("m") - $month;
+        $day_diff   = date("d") - $day;
+        if ($month_diff < 0) $year_diff--;
+            elseif (($month_diff==0) && ($day_diff < 0)) $year_diff--;
+        return $year_diff;
     }
 
     public function store(Request $request){
@@ -97,6 +134,78 @@ class PendaftaranController extends Controller
     }
 
     public function destroy($id){
+        $pendaftaran=\App\Models\Rawpus\Pendaftaran::find($id);
 
+        $hapus=$pendaftaran->delete();
+
+        if($hapus){
+            $data=array(
+                'success'=>true,
+                'pesan'=>'Data berhasil dihapus',
+                'error'=>''
+            );
+        }else{
+            $data=array(
+                'success'=>false,
+                'pesan'=>'Data gagal dihapus',
+                'error'=>''
+            );
+        }
+
+        return $data;
+    }
+
+    public function cari_pendaftaran(Request $request){
+        $rules=[
+            'q'=>'required',
+            'type'=>'required'
+        ];
+
+        $validasi=\Validator::make($request->all(),$rules);
+
+        if($validasi->fails()){
+            $data=array(
+                'success'=>false,
+                'pesan'=>'Validasi error',
+                'error'=>$validasi->errors()->all()
+            );
+        }else{
+            $type=$request->input('type');
+            $q=$request->input('q');
+
+            $pelayanan = \App\Models\Rawpus\Pelayanan::pluck('no_pendaftaran_atau_kartu')->all();
+
+            switch($type){
+                case 'pendaftaran':
+                        $pendaftaran=\App\Models\Rawpus\Pendaftaran::where('no_pendaftaran',$q)
+                            ->whereNotIn('no_pendaftaran',$pelayanan)
+                            ->with('pasien','pasien.desa')
+                            ->get();
+                    break;
+                case 'nokartu':
+                        $pendaftaran=\App\Models\Rawpus\Pendaftaran::with(
+                            [
+                                'pasien'=>function($row) use($q){
+                                    $row->where('no_kartu',$q);
+                                },
+                                'pasien.desa'
+                            ]
+                        )
+                        ->whereNotIn('no_pendaftaran',$pelayanan)
+                        ->get();
+                    break;
+                default:
+
+                    break;
+            }
+
+            $data=array(
+                'success'=>true,
+                'pesan'=>'Data berhasil diload',
+                'pendaftaran'=>$pendaftaran
+            );
+        }
+
+        return $data;
     }
 }

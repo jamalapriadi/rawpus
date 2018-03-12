@@ -7,5 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Pendaftaran extends Model
 {
     protected $table="pendaftaran";
+    protected $primaryKey="no_pendaftaran";
+    
     public $incrementing=false;
+
+    public function pasien(){
+        return $this->belongsTo('App\Models\Rawpus\Pasien','no_kartu','no_kartu');
+    }
+
+    public function pelayanan(){
+        return $this->hasOne('App\Models\Rawpus\Pelayanan','no_pendaftaran_atau_kartu','no_pendaftaran');
+    }
 }

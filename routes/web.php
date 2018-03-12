@@ -61,5 +61,7 @@ Route::group(['prefix'=>'home'],function(){
 
         Route::get('pencarian','Rawpus\PasienController@list_pencarian');
         Route::resource('pendaftaran','Rawpus\PendaftaranController');
+        Route::get('cari-pendaftaran','Rawpus\PendaftaranController@cari_pendaftaran');
+        Route::resource('pelayanan','Rawpus\PelayananController');
     });
 });
