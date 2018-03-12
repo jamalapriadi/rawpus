@@ -17,4 +17,8 @@ class Pelayanan extends Model
     public function pelayanan(){
         return $this->hasOne('App\Models\Rawpus\Pelayanan','no_pendaftaran_atau_kartu','no_pendaftaran');
     }
+
+    public function diagnosa(){
+        return $this->belongsTo('App\Models\Rawpus\Diagnosa','diagnosa_id');
+    }
 }

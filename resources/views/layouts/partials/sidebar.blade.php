@@ -36,8 +36,8 @@
                     <div id="subLihatdata" class="collapse ">
                         <ul class="nav">
                             <li><a href="{{URL::to('home/jumlah-peserta-terdaftar')}}" class="{{ Request::path() == 'home/jumlah-peserta-terdaftar' ? 'active' : '' }}">Jumlah Pasien Terdaftar</a></li>
-                            <li><a href="{{URL::to('home/daftar-kunjungan-peserta-sakit')}}" class="{{ Request::path() == 'home/daftar-kunjungan-peserta-sakit' ? 'active' : '' }}">Daftar Kunjungan Peserta Sakit</a></li>
-                            <li><a href="{{URL::to('home/daftar-kunjungan-peserta-sehat')}}" class="{{ Request::path() == 'home/daftar-kunjungan-peserta-sehat' ? 'active' : '' }}">Daftar Kunjungan Peserta Sehat</a></li>
+                            <li><a href="{{URL::to('home/daftar-kunjungan-peserta-sakit')}}" class="{{ Request::path() == 'home/daftar-kunjungan-peserta-sakit' ? 'active' : '' }}">Daftar Kunjungan Pasien Sakit</a></li>
+                            <li><a href="{{URL::to('home/daftar-kunjungan-peserta-sehat')}}" class="{{ Request::path() == 'home/daftar-kunjungan-peserta-sehat' ? 'active' : '' }}">Daftar Kunjungan Pasien Sehat</a></li>
                             <li><a href="{{URL::to('home/daftar-10-diagnosa-terbanyak')}}" class="{{ Request::path() == 'home/daftar-10-diagnosa-terbanyak' ? 'active' : '' }}">Daftar 10 Diagnosa Terbanyak</a></li>
                         </ul>
                     </div>
