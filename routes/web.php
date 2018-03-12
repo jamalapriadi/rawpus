@@ -63,5 +63,9 @@ Route::group(['prefix'=>'home'],function(){
         Route::resource('pendaftaran','Rawpus\PendaftaranController');
         Route::get('cari-pendaftaran','Rawpus\PendaftaranController@cari_pendaftaran');
         Route::resource('pelayanan','Rawpus\PelayananController');
+
+        Route::group(['prefix'=>'report'],function(){
+            Route::get('list-kunjungan','Rawpus\ReportController@list_kunjungan');
+        });
     });
 });

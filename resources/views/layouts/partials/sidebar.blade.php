@@ -35,7 +35,7 @@
                     <a href="#subLihatdata" data-toggle="collapse" class="collapsed"><i class="icon-folder-search"></i> <span>Lihat Data</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                     <div id="subLihatdata" class="collapse ">
                         <ul class="nav">
-                            <li><a href="{{URL::to('home/jumlah-peserta-terdaftar')}}" class="{{ Request::path() == 'home/jumlah-peserta-terdaftar' ? 'active' : '' }}">Jumlah Peserta Terdaftar</a></li>
+                            <li><a href="{{URL::to('home/jumlah-peserta-terdaftar')}}" class="{{ Request::path() == 'home/jumlah-peserta-terdaftar' ? 'active' : '' }}">Jumlah Pasien Terdaftar</a></li>
                             <li><a href="{{URL::to('home/daftar-kunjungan-peserta-sakit')}}" class="{{ Request::path() == 'home/daftar-kunjungan-peserta-sakit' ? 'active' : '' }}">Daftar Kunjungan Peserta Sakit</a></li>
                             <li><a href="{{URL::to('home/daftar-kunjungan-peserta-sehat')}}" class="{{ Request::path() == 'home/daftar-kunjungan-peserta-sehat' ? 'active' : '' }}">Daftar Kunjungan Peserta Sehat</a></li>
                             <li><a href="{{URL::to('home/daftar-10-diagnosa-terbanyak')}}" class="{{ Request::path() == 'home/daftar-10-diagnosa-terbanyak' ? 'active' : '' }}">Daftar 10 Diagnosa Terbanyak</a></li>
