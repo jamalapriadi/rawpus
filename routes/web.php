@@ -39,6 +39,8 @@ Route::group(['prefix'=>'home'],function(){
     Route::get('daftar-kunjungan-peserta-sakit','HomeController@rawpus_daftar_kunjungan_peserta_sakit');
     Route::get('daftar-kunjungan-peserta-sehat','HomeController@rawpus_daftar_kunjungan_peserta_sehat');
     Route::get('daftar-10-diagnosa-terbanyak','HomeController@rawpus_daftar_10_diagnosa_terbanyak');
+    Route::get('laporan-rawat-inap','HomeController@rawpus_laporan_rawat_inap');
+    Route::get('laporan-rawat-jalan','HomeController@rawpus_laporan_rawat_jalan');
 
     Route::group(['prefix'=>'data'],function(){
         Route::resource('users','User\UserController');
@@ -65,7 +67,12 @@ Route::group(['prefix'=>'home'],function(){
         Route::resource('pelayanan','Rawpus\PelayananController');
 
         Route::group(['prefix'=>'report'],function(){
-            Route::get('list-kunjungan','Rawpus\ReportController@list_kunjungan');
+            Route::post('list-kunjungan-sakit','Rawpus\ReportController@list_kunjungan_sakit');
+            Route::post('list-kunjungan-sehat','Rawpus\ReportController@list_kunjungan_sehat');
+            Route::post('laporan-rawat-inap','Rawpus\ReportController@laporan_rawat_inap');
+            Route::post('laporan-rawat-jalan','Rawpus\ReportController@laporan_rawat_jalan');
+            Route::post('jumlah-pasien-terdaftar','Rawpus\ReportController@jumlah_peserta_terdaftar');
+            Route::post('daftar-10-diagnosa-terbanyak','Rawpus\ReportController@daftar_10_diagnosa_terbanyak');
         });
     });
 });

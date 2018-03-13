@@ -105,4 +105,12 @@ class HomeController extends Controller
     public function rawpus_daftar_10_diagnosa_terbanyak(){
         return view('rawpus.daftar_10_diagnosa_terbanyak');
     }
+
+    public function rawpus_laporan_rawat_inap(){
+        return view('rawpus.laporan_rawat_inap');
+    }
+
+    public function rawpus_laporan_rawat_jalan(){
+        return view('rawpus.laporan_rawat_jalan');
+    }
 }

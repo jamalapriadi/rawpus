@@ -242,7 +242,7 @@
                                         '</div>'+
                                         '<div class="form-group">'+
                                             '<label class="col-lg-4 control-label">Tinggi Badan</label>'+
-                                            '<div class="col-lg-3">'+
+                                            '<div class="col-lg-4">'+
                                                 '<div class="input-group">'+
                                                     '<input class="form-control" name="tinggi_badan">'+
                                                     '<span class="input-group-addon">'+
@@ -253,7 +253,7 @@
                                         '</div>'+
                                         '<div class="form-group">'+
                                             '<label class="col-lg-4 control-label">Berat Badan</label>'+
-                                            '<div class="col-lg-3">'+
+                                            '<div class="col-lg-4">'+
                                                 '<div class="input-group">'+
                                                     '<input class="form-control" name="berat_badan">'+
                                                     '<span class="input-group-addon">'+
@@ -271,7 +271,7 @@
                                         '</div>'+
                                         '<div class="form-group">'+
                                             '<label class="col-lg-4 control-label">- Sistole :</label>'+
-                                            '<div class="col-lg-3">'+
+                                            '<div class="col-lg-4">'+
                                                 '<div class="input-group">'+
                                                     '<input class="form-control" name="sistole">'+
                                                     '<span class="input-group-addon">'+
@@ -282,7 +282,7 @@
                                         '</div>'+
                                         '<div class="form-group">'+
                                             '<label class="col-lg-4 control-label">- Diastole :</label>'+
-                                            '<div class="col-lg-3">'+
+                                            '<div class="col-lg-4">'+
                                                 '<div class="input-group">'+
                                                     '<input class="form-control" name="diastole">'+
                                                     '<span class="input-group-addon">'+
@@ -293,7 +293,7 @@
                                         '</div>'+
                                         '<div class="form-group">'+
                                             '<label class="col-lg-4 control-label">Respiratory Rate</label>'+
-                                            '<div class="col-lg-4">'+
+                                            '<div class="col-lg-5">'+
                                                 '<div class="input-group">'+
                                                     '<input class="form-control" name="respiratory">'+
                                                     '<span class="input-group-addon">'+
@@ -304,7 +304,7 @@
                                         '</div>'+
                                         '<div class="form-group">'+
                                             '<label class="col-lg-4 control-label">Heart Rate</label>'+
-                                            '<div class="col-lg-3">'+
+                                            '<div class="col-lg-4">'+
                                                 '<div class="input-group">'+
                                                     '<input class="form-control" name="heart">'+
                                                     '<span class="input-group-addon">'+

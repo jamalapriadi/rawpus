@@ -3,7 +3,7 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h6 class="panel-title">List Kunjungan Sehat</h6>
+            <h6 class="panel-title">List Rawat Inap</h6>
         </div>
         <div class="panel-body">
             <form class="form-horizontal" id="form" onsubmit="return false;">
@@ -118,7 +118,7 @@
                 var formData = new FormData($('#form')[0]);
 
                 $.ajax({
-                    url:"{{URL::to('home/data/report/list-kunjungan-sehat')}}",
+                    url:"{{URL::to('home/data/report/laporan-rawat-inap')}}",
                     type:"POST",
                     data:formData,
                     dataType    : 'JSON',
@@ -139,6 +139,7 @@
                                     "<th>Nama Peserta</th>"+
                                     "<th>Sex</th>"+
                                     "<th>Keluhan</th>"+
+                                    "<th>Diagnosa</th>"+
                                 "</tr>"+
                             "</thead>"+
                             "<tbody>";
@@ -152,6 +153,17 @@
                                         "<td>"+b.pasien.nama_peserta+"</td>"+
                                         "<td>"+b.pasien.sex+"</td>"+
                                         "<td>"+b.keluhan+"</td>"+
+                                        "<td>";
+                                            if(b.pelayanan!=null){
+                                                if(b.pelayanan.diagnosa!=null){
+                                                    el+=b.pelayanan.diagnosa.diagnosa;
+                                                }else{
+                                                    el+="<label class='label label-danger'>Tidak ada Diagnosa</label>";
+                                                }
+                                            }else{
+                                                el+="Belum ada pelayanan";
+                                            }
+                                        el+="</td>"+
                                     "</tr>";
                                 })
                         el+="</tbody>"+
@@ -199,7 +211,7 @@
                 var formData = new FormData(this);
                 
                 $.ajax({
-                    url:"{{URL::to('home/data/report/list-kunjungan-sehat')}}",
+                    url:"{{URL::to('home/data/report/laporan-rawat-inap')}}",
                     type:"POST",
                     data:formData,
                     dataType    : 'JSON',
@@ -220,6 +232,7 @@
                                     "<th>Nama Peserta</th>"+
                                     "<th>Sex</th>"+
                                     "<th>Keluhan</th>"+
+                                    "<th>Diagnosa</th>"+
                                 "</tr>"+
                             "</thead>"+
                             "<tbody>";
@@ -233,6 +246,17 @@
                                         "<td>"+b.pasien.nama_peserta+"</td>"+
                                         "<td>"+b.pasien.sex+"</td>"+
                                         "<td>"+b.keluhan+"</td>"+
+                                        "<td>";
+                                            if(b.pelayanan!=null){
+                                                if(b.pelayanan.diagnosa!=null){
+                                                    el+=b.pelayanan.diagnosa.diagnosa;
+                                                }else{
+                                                    el+="Tidak ada Diagnosa";
+                                                }
+                                            }else{
+                                                el+="<label class='label label-danger'>Tidak ada Diagnosa</label>";
+                                            }
+                                        el+="</td>"+
                                     "</tr>";
                                 })
                         el+="</tbody>"+
