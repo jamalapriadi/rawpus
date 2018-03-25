@@ -6,7 +6,7 @@
             <h6 class="panel-title">List Kunjungan Sakit</h6>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" id="form" onsubmit="return false;">
+            <form class="form-horizontal" id="forms" action="{{URL::to('home/data/report/cetak-daftar-kunjungan-peserta-sakit')}}" method="post" target="new target">
                 <div class="row well">
                     <div class="form-group">
                         <label class="col-lg-2">
@@ -55,8 +55,8 @@
 
                     <div class="form-group">
                         <label class="col-lg-2"></label>
-                        <button class="btn btn-primary"><i class="icon-search4"></i> Cari Data</button>
-                        <!-- <a class="btn btn-success"><i class="icon-printer4"></i> Cetak</a> -->
+                        <a class="btn btn-primary" id="tampilkan"><i class="icon-search4"></i> Cari Data</a>
+                        <button class="btn btn-success"><i class="icon-printer4"></i> Cetak</button>
                     </div>
                 </div>
             </form>
@@ -115,7 +115,7 @@
             });
 
             function showData(){
-                var formData = new FormData($('#form')[0]);
+                var formData = new FormData($('#forms')[0]);
 
                 $.ajax({
                     url:"{{URL::to('home/data/report/list-kunjungan-sakit')}}",
@@ -134,6 +134,7 @@
                             "<thead>"+
                                 "<tr>"+
                                     "<th>No.</th>"+
+                                    "<th>No. Pendaftaran</th>"+
                                     "<th>Tgl Pendaftaran</th>"+
                                     "<th>No. Kartu</th>"+
                                     "<th>Nama Peserta</th>"+
@@ -148,6 +149,7 @@
                                     no++;
                                     el+="<tr>"+
                                         "<td>"+no+"</td>"+
+                                        "<td>"+b.no_pendaftaran+"</td>"+
                                         "<td>"+b.tgl_pendaftaran+"</td>"+
                                         "<td>"+b.pasien.no_kartu+"</td>"+
                                         "<td>"+b.pasien.nama_peserta+"</td>"+
@@ -208,8 +210,12 @@
             }
 
             $(document).on("submit","#form",function(e){
-                var formData = new FormData(this);
-                
+                var formData = new FormData($('#forms')[0]);
+            })
+
+            $(document).on("click","#tampilkan",function(e){
+                var formData = new FormData($('#forms')[0]);
+
                 $.ajax({
                     url:"{{URL::to('home/data/report/list-kunjungan-sakit')}}",
                     type:"POST",

@@ -47,7 +47,11 @@
                             <label class="col-lg-4 control-label">Poli</label>
                             <div class="col-lg-6">
                                 <select name="poli" class="form-control">
-                                    <option value="umum">Umum</option>
+                                    <option value="umum">UMUM</option>
+                                    <option value="gigi">GIGI</option>
+                                    <option value="kia">KIA</option>
+                                    <option value="lab">LAB</option>
+                                    <option value="kb">KB</option>
                                 </select>
                             </div>
                         </div>

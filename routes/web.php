@@ -23,6 +23,7 @@ Route::group(['prefix'=>'home'],function(){
     Route::get('role/{id}/permission','HomeController@permission');
     Route::get('user','HomeController@user');
     Route::get('user/{id}/role','HomeController@user_role');
+    Route::get('change-password','HomeController@user_change_password');
 
     Route::get('status-ketenangaan','HomeController@rawpus_status_ketenagaan');
     Route::get('jabatan','HomeController@rawpus_jabatan');
@@ -50,6 +51,7 @@ Route::group(['prefix'=>'home'],function(){
         Route::get('list-role-user','User\UserController@list_role');
         Route::post('save-role-user','User\UserController@save_role_user');
         Route::post('hapus-role-user','User\UserController@hapus_role_user');
+        Route::post('change-password','User\UserController@change_password');
 
         Route::resource('status-ketenagaan','Rawpus\StatusketenagaanController');
         Route::get('list-status-ketenagaan','Rawpus\StatusketenagaanController@list_ketenagaan');
@@ -73,6 +75,13 @@ Route::group(['prefix'=>'home'],function(){
             Route::post('laporan-rawat-jalan','Rawpus\ReportController@laporan_rawat_jalan');
             Route::post('jumlah-pasien-terdaftar','Rawpus\ReportController@jumlah_peserta_terdaftar');
             Route::post('daftar-10-diagnosa-terbanyak','Rawpus\ReportController@daftar_10_diagnosa_terbanyak');
+
+            Route::post('cetak-daftar-kunjungan-peserta-sakit','Rawpus\ReportController@cetak_daftar_kunjungan_peserta_sakit');
+            Route::post('cetak-daftar-kunjungan-peserta-sehat','Rawpus\ReportController@cetak_daftar_kunjungan_peserta_sehat');
+            Route::post('cetak-laporan-rawat-inap','Rawpus\ReportController@cetak_laporan_rawat_inap');
+            Route::post('cetak-laporan-rawat-jalan','Rawpus\ReportController@cetak_laporan_rawat_jalan');
+            Route::post('cetak-daftar-10-diagnosa-terbanyak','Rawpus\ReportController@cetak_daftar_10_diagnosa_terbanyak');
+            Route::post('cetak-jumlah-peserta-terdaftar','Rawpus\ReportController@cetak_jumlah_peserta_terdaftar');
         });
     });
 });

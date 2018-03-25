@@ -6,7 +6,7 @@
             <h6 class="panel-title">Daftar 10 Diagnosa Terbanyak</h6>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" id="form" onsubmit="return false;">
+            <form class="form-horizontal" id="forms" action="{{URL::to('home/data/report/cetak-daftar-10-diagnosa-terbanyak')}}" method="post" target="new target">
                 <div class="row well">
                     <div class="form-group">
                         <div class="col-lg-2">
@@ -32,8 +32,9 @@
                                 @endfor
                             </select>
                         </div>
-                        <div class="col-lg-2">
-                            <button class="btn btn-primary" style="margin-top:5px"><i class="icon-search4"></i> Cari Data</button>
+                        <div class="col-lg-4">
+                            <a class="btn btn-primary" style="margin-top:5px" id="tampilkan"><i class="icon-search4"></i> Cari Data</a>
+                            <button style="margin-top:5px" class="btn btn-success"><i class="icon-printer4"></i> Cetak</button>
                         </div>
                     </div>
                 </div>
@@ -93,7 +94,7 @@
             });
 
             function showData(){
-                var formData = new FormData($('#form')[0]);
+                var formData = new FormData($('#forms')[0]);
 
                 $.ajax({
                     url:"{{URL::to('home/data/report/daftar-10-diagnosa-terbanyak')}}",
@@ -169,8 +170,12 @@
                 })
             }
 
-            $(document).on("submit","#form",function(e){
-                var formData = new FormData(this);
+            $(document).on("submit","#forms",function(e){
+                
+            })
+
+            $(document).on("click","#tampilkan",function(e){
+                var formData = new FormData($('#forms')[0]);
                 
                 $.ajax({
                     url:"{{URL::to('home/data/report/daftar-10-diagnosa-terbanyak')}}",

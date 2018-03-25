@@ -47,6 +47,10 @@ class HomeController extends Controller
             ->with('id',$id);
     }
 
+    public function user_change_password(){
+        return view('user.change_password');
+    }
+
     public function rawpus_status_ketenagaan(){
         return view('rawpus.status_ketenagaan');
     }
