@@ -41,6 +41,7 @@
             </form>
 
             <div id="tampilData"></div>
+            <div id="detailPasien"></div>
         </div>
     </div>
 @stop
@@ -123,7 +124,7 @@
                                     no++;
                                     el+="<tr>"+
                                         "<td>"+no+"</td>"+
-                                        "<td>"+b.tanggal+"</td>"+
+                                        "<td><a class='detailpeserta' bulan='"+b.tanggal+"'>"+b.tanggal+"</a></td>"+
                                         "<td>"+b.jumlah+"</td>"+
                                     "</tr>";
                                 })
@@ -203,7 +204,7 @@
                                     no++;
                                     el+="<tr>"+
                                         "<td>"+no+"</td>"+
-                                        "<td>"+b.tanggal+"</td>"+
+                                        "<td><a class='detailpeserta' bulan='"+b.tanggal+"'>"+b.tanggal+"</a></td>"+
                                         "<td>"+b.jumlah+"</td>"+
                                     "</tr>";
                                 })
@@ -244,6 +245,58 @@
                     },
                     error:function(){
 
+                    }
+                })
+            })
+
+            $(document).on("click",".detailpeserta",function(){
+                var bulan=$(this).attr("bulan");
+
+                $.ajax({
+                    url:"{{URL::to('home/data/report/detail-jumlah-pasien-terdaftar')}}",
+                    type:"GET",
+                    data:"bulan="+bulan,
+                    beforeSend:function(){
+                        $("#detailPasien").empty().html("<div class='alert alert-info'>Please Wait. ...</div>");
+                    },
+                    success:function(result){
+                        var el="";
+                        el+="<div class='panel panel-info'>"+
+                            "<div class='panel-heading'>"+
+                                "<h6>Detail Pasien Terdaftar Periode -"+result.bulan+"</h6>"+
+                            "</div>"+
+                            "<div class='panel-body'>"+
+                                "<table class='table table-striped'>"+
+                                    "<thead>"+
+                                        "<tr>"+
+                                            "<th>No.</th>"+
+                                            "<th>Nama Pasien</th>"+
+                                            "<th>Sex</th>"+
+                                            "<th>Tgl Lahir</th>"+
+                                            "<th>Alamat</th>"+
+                                        "</tr>"+
+                                    "</thead>"+
+                                    "<tbody>";
+                                    var no=0;
+                                    $.each(result.data,function(a,b){
+                                        no++;
+                                        el+="<tr>"+
+                                            "<td>"+no+"</td>"+
+                                            "<td>"+b.nama_peserta+"</td>"+
+                                            "<td>"+b.sex+"</td>"+
+                                            "<td>"+b.tgl_lahir+"</td>"+
+                                            "<td>"+b.alamat+"</td>"+
+                                        "</tr>";
+                                    })
+                                    el+="</tbody>"+
+                                "</table>"+
+                            "</div>"+
+                        "</div>";
+
+                        $("#detailPasien").empty().html(el);
+                    },
+                    error:function(){
+                        $("#detailPasien").empty().html("<div class='alert alert-danger'>Data failed to load</div>");
                     }
                 })
             })

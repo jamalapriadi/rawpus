@@ -179,7 +179,7 @@
                                         '<div class="form-group">'+
                                             '<label class="col-lg-4 control-label">No. Kartu BPJS</label>'+
                                             '<div class="col-lg-8">'+
-                                                '<input type="hidden" name="nopendaftaran" value="'+b.no_pendaftaran+'">'+
+                                                '<input type="hidden" name="no_pendaftaran" value="'+b.no_pendaftaran+'">'+
                                                 b.pasien.no_kartu+
                                             '</div>'+
                                         '</div>'+
@@ -265,6 +265,9 @@
                                         '<div class="col-lg-8">'+
                                             '<select name="kesadaran" id="kesadaran" class="form-control">'+
                                                 '<option value="Compos Mentis">Compos Mentis</option>'+
+                                                '<option value="Somnolence">Somnolence</option>'+
+                                                '<option value="Sopor">Sopor</option>'+
+                                                '<option value="Coma">Coma</option>'+
                                             '</select>'+
                                         '</div>'+
                                     '</div>'+
@@ -355,7 +358,7 @@
                                         '<label class="col-lg-4 control-label">Status Pulang</label>'+
                                         '<div class="col-lg-8">'+
                                             '<select name="status" id="status" class="form-control">'+
-                                                '<option value="Sembuh">Sembuh</option>'+
+                                                '<option value="Berobat Jalan">Berobat Jalan</option>'+
                                             '</select>'+
                                         '</div>'+
                                     '</div>';
@@ -400,7 +403,7 @@
                                         '<div class="form-group">'+
                                             '<label class="col-lg-4 control-label">No. Kartu BPJS</label>'+
                                             '<div class="col-lg-8">'+
-                                                '<input type="hidden" name="nopendaftaran" value="'+b.no_pendaftaran+'">'+
+                                                '<input type="hidden" name="no_pendaftaran" value="'+b.no_pendaftaran+'">'+
                                                 b.pasien.no_kartu+
                                             '</div>'+
                                         '</div>'+
@@ -486,6 +489,9 @@
                                         '<div class="col-lg-8">'+
                                             '<select name="kesadaran" id="kesadaran" class="form-control">'+
                                                 '<option value="Compos Mentis">Compos Mentis</option>'+
+                                                '<option value="Somnolence">Somnolence</option>'+
+                                                '<option value="Sopor">Sopor</option>'+
+                                                '<option value="Coma">Coma</option>'+
                                             '</select>'+
                                         '</div>'+
                                     '</div>'+
@@ -576,7 +582,7 @@
                                         '<label class="col-lg-4 control-label">Status Pulang</label>'+
                                         '<div class="col-lg-8">'+
                                             '<select name="status" id="status" class="form-control">'+
-                                                '<option value="Sembuh">Sembuh</option>'+
+                                                '<option value="Berobat Jalan">Berobat Jalan</option>'+
                                             '</select>'+
                                         '</div>'+
                                     '</div>';

@@ -74,6 +74,7 @@ Route::group(['prefix'=>'home'],function(){
             Route::post('laporan-rawat-inap','Rawpus\ReportController@laporan_rawat_inap');
             Route::post('laporan-rawat-jalan','Rawpus\ReportController@laporan_rawat_jalan');
             Route::post('jumlah-pasien-terdaftar','Rawpus\ReportController@jumlah_peserta_terdaftar');
+            Route::get('detail-jumlah-pasien-terdaftar','Rawpus\ReportController@detail_jumlah_peserta_terdaftar');
             Route::post('daftar-10-diagnosa-terbanyak','Rawpus\ReportController@daftar_10_diagnosa_terbanyak');
 
             Route::post('cetak-daftar-kunjungan-peserta-sakit','Rawpus\ReportController@cetak_daftar_kunjungan_peserta_sakit');

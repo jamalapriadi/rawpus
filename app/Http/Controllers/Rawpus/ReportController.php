@@ -567,9 +567,26 @@ class ReportController extends Controller
             count(a.no_kartu) as jumlah
             from pendaftaran a 
             where DATE_FORMAT(a.tgl_pendaftaran,'%Y-%m')='$all'
-            group by DATE_FORMAT(a.tgl_pendaftaran,'%Y-%m'),a.no_kartu");
+            group by DATE_FORMAT(a.tgl_pendaftaran,'%Y-%m')");
 
         return array('data'=>$jumlah,'all'=>$all);
+    }
+
+    public function detail_jumlah_peserta_terdaftar(Request $request){
+        if($request->has('bulan')){
+            $bulan=$request->input('bulan');
+        }else{
+            $bulan=date('m');
+        }
+
+        $jumlah=\DB::select("select DATE_FORMAT(a.tgl_pendaftaran,'%Y-%m') as tanggal,
+            a.no_kartu,b.*
+            from pendaftaran a 
+            left join pasien b on b.no_kartu=a.no_kartu
+            where DATE_FORMAT(a.tgl_pendaftaran,'%Y-%m')='$bulan'
+            "); 
+
+        return array('data'=>$jumlah,'bulan'=>$bulan);
     }
 
     public function daftar_10_diagnosa_terbanyak(Request $request){

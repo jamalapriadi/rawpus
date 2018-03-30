@@ -185,13 +185,13 @@ class PendaftaranController extends Controller
                 case 'nokartu':
                         $pendaftaran=\App\Models\Rawpus\Pendaftaran::with(
                             [
-                                'pasien'=>function($row) use($q){
-                                    $row->where('no_kartu',$q);
-                                },
+                                'pasien',
                                 'pasien.desa'
                             ]
                         )
                         ->whereNotIn('no_pendaftaran',$pelayanan)
+                        ->whereHas('pasien')
+                        ->where('no_kartu',$q)
                         ->get();
                     break;
                 default:
