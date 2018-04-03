@@ -132,7 +132,7 @@
                                     '<div id="pesan"></div>'+
                                     '<div class="form-group">'+
                                         '<label class="control-label text-semibold">NIK</label>'+
-                                        '<input class="form-control" name="nik" id="nik" placeholder="NIK" required>'+
+                                        '<input class="form-control" name="nik" id="nik" placeholder="NIK" maxlength="16" onblur="checkLength(this)" required>'+
                                     '</div>'+
                                     '<div class="form-group">'+
                                         '<label class="control-label text-semibold">No. Kartu</label>'+
@@ -243,6 +243,12 @@
                 }else console.log("invalid form");
             });
 
+            function checkLength(el) {
+                if (el.value.length != 16) {
+                    alert("length must be exactly 16 characters")
+                }
+            }
+
             $(document).on("click",".edit",function(){
                 kode=$(this).attr("kode");
                 var el="";
@@ -281,7 +287,7 @@
                         el+='<div id="pesan"></div>'+
                         '<div class="form-group">'+
                             '<label class="control-label text-semibold">NIK</label>'+
-                            '<input class="form-control" name="nik" value="'+result.nik+'" id="nik" placeholder="NIK" required>'+
+                            '<input class="form-control" name="nik" value="'+result.nik+'" id="nik" placeholder="NIK" maxlength="16" onblur="checkLength(this)" required>'+
                         '</div>'+
                         '<div class="form-group">'+
                             '<label class="control-label text-semibold">No. Kartu</label>'+
